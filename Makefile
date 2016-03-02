@@ -1,9 +1,9 @@
-
-PLUGIN_NAME = LivR2009_Model_Plugin
+PLUGIN_NAME = livshitz_rudy_2009
 
 HEADERS = LivR2009_Model.h
 
-SOURCES = LivR2009_Model.cpp include/PowFast.cpp
+SOURCES = LivR2009_Model.cpp \
+          include/PowFast.cpp
 
 LIBS = 
 
