@@ -82,43 +82,24 @@ LivR2009_Model::LivR2009_Model(void): DefaultGUIModel("LivR2009_Model",::vars,::
 
 	// Initial conditions at 0 beats
 	/*
-	V = -84.7;
-	Cai = 0.0822e-3;
-	CaNSR = 1.25;
-	CaJSR = 1.25;
-	Nai = 9.71;
-	Ki = 142.82;
-	m = 2.46e-4;
-	h = 0.99869;
-	j = 0.99887;
-	d = 1e-4;
-	f = 0.983;
-	b = 1e-4;
-	g = 0.983;
-	xKr = 0.229;
-	xs1 = 1e-4;
-	xs2 = 1e-4;
-	Jrel = 1e-4;
-	*////////////////////////////////
-
-	// Initial conditions after 700 beats
-	// V = -88.9248;
-	// Cai = 1.1366e-04;
-	// CaNSR = 1.7519;
-	// CaJSR = 1.6213;
-	// Nai = 14.1538;
-	// Ki = 136.5910;
-	// m = 8.0083e-04;
-	// h = 0.9931;
-	// j = 0.9957;
-	// d = 9.8446e-26;
-	// f = 0.9998;
-	// b = 9.6988e-04;
-	// g = 0.9942;
-	// xKr = 1.2471e-04;
-	// xs1 = 0.0049;
-	// xs2 = 0.0243;
-	// Jrel = 2.4967e-18;
+		V = -84.7;
+		Cai = 0.0822e-3;
+		CaNSR = 1.25;
+		CaJSR = 1.25;
+		Nai = 9.71;
+		Ki = 142.82;
+		m = 2.46e-4;
+		h = 0.99869;
+		j = 0.99887;
+		d = 1e-4;
+		f = 0.983;
+		b = 1e-4;
+		g = 0.983;
+		xKr = 0.229;
+		xs1 = 1e-4;
+		xs2 = 1e-4;
+		Jrel = 1e-4;
+	*/
 
 	//Initial conditions after conc change - 800 beats
 	V = -8.185872e+01;
@@ -321,7 +302,6 @@ void LivR2009_Model::solve(double DT) {
 	/* K currents */
 	// Time independent K current
 	// fastExp results in segmentation error for exp(0.6987*(V-EK+11.724)) for *unknown reason*
-	//xK1 = 0.004 * (1 + exp(0.6987*(V-EK+11.724))) / (1+fastEXP(0.6168*(V-EK+4.872)));
 	xK1 = 0.004 * (1 + fastEXP(0.6987*(V-EK+11.724))) / (1+fastEXP(0.6168*(V-EK+4.872)));
 
 	IK1 = GK1_ * sqrt(Ko/5.4) * (V-EK) / (1+xK1);
@@ -331,7 +311,6 @@ void LivR2009_Model::solve(double DT) {
 	IKr = GKr_ * sqrt(Ko/5.4) * xKr * RKr * (V - EK);
 
 	// Fast component of the delayed rectifier K current
-	//IKs = GKs_ * (1 + 0.6/(pow(3.8e-5/Cai,1.4)+1)) * xs1 * xs2 * (V - EKs);
 	IKs = GKs_ * (1 + 0.6/(fastEXP(1.4*log(3.8e-5/Cai))+1)) * xs1 * xs2 * (V - EKs);
 
 	// Plateau K current
@@ -342,7 +321,6 @@ void LivR2009_Model::solve(double DT) {
 	// Na-K pump
 	sigma_NaK = (fastEXP(Nao/67.3) - 1) / 7.0; 
 	fNaK = 1/(1 + 0.1245*fastEXP(-0.1*V*FRT) + 0.0365 * sigma_NaK * fastEXP(-V*FRT));
-	//INaK = INaK_ * fNaK * Ko / ( (Ko + KmK_NaK) * pow( 1 + ((KmNa_NaK/Nai)*(KmNa_NaK/Nai)),2) );
 	INaK = INaK_ * fNaK * Ko / ( (Ko + KmK_NaK) * ( 1 + ((KmNa_NaK/Nai)*(KmNa_NaK/Nai))) );
 
 	// Na-Ca exchanger
@@ -351,7 +329,6 @@ void LivR2009_Model::solve(double DT) {
 
 	/* Intracellular Ca fluxes */
 	// SR Ca release, uptake, and leak
-	//Jrelinf = alpha_rel * beta_tau * ICaL / (pow((Krel_inf/CaJSR),hrel) + 1);
 	Jrelinf = alpha_rel * beta_tau * ICaL / (fastEXP(hrel*log(Krel_inf/CaJSR)) + 1);
 	tau_rel = beta_tau / (Krel_tau/CaJSR + 1);
 	dJreldt = - (Jrelinf + Jrel) / tau_rel;
@@ -471,27 +448,6 @@ void LivR2009_Model::update(DefaultGUIModel::update_flags_t flag) {
 			xs2 = 1e-4;
 			Jrel = 1e-4;
 		*////////////////////////////////
-
-		// Initial conditions after 700 beats
-		/*	
-		 	V = -88.9248;
-			Cai = 1.1366e-04;
-			CaNSR = 1.7519;
-			CaJSR = 1.6213;
-			Nai = 14.1538;
-			Ki = 136.5910;
-			m = 8.0083e-04;
-			h = 0.9931;
-			j = 0.9957;
-			d = 9.8446e-26;
-			f = 0.9998;
-			b = 9.6988e-04;
-			g = 0.9942;
-			xKr = 1.2471e-04;
-			xs1 = 0.0049;
-			xs2 = 0.0243;
-			Jrel = 2.4967e-18;
-		*/
 
 		V = -8.185872e+01;
 		Cai = 1.797384e-04; 
