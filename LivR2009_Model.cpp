@@ -76,7 +76,7 @@ static size_t num_vars = sizeof(vars)/sizeof(DefaultGUIModel::variable_t);
 /*** Model constructor using DefaultGUIModel ***/
 LivR2009_Model::LivR2009_Model(void): DefaultGUIModel("LivR2009_Model",::vars,::num_vars) {
 
-	createGUI( vars, num_vars );
+	DefaultGUIModel::createGUI( vars, num_vars );
 
 	Cm = 100e-12; // 100pF
 
@@ -280,6 +280,7 @@ LivR2009_Model::LivR2009_Model(void): DefaultGUIModel("LivR2009_Model",::vars,::
 	powFast = new PowFast(18);
 
 	refresh();
+	resizeMe();
 }
 
 LivR2009_Model::~LivR2009_Model(void) {
