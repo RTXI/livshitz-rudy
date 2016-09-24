@@ -1,25 +1,25 @@
 /*
  * Copyright (C) 2011 Weill Medical College of Cornell University
  *
- *  This program is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU General Public License as
- *  published by the Free Software Foundation; either version 2 of the
- *  License, or (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option)
+ * any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 675 Mass
+ * Ave, Cambridge, MA 02139, USA.
  */
 
 /*** INTRO
  *
- * 2009 Livshitz Rudy Model of a ventricular guinea pig myocte
- * Biophysical Journal, 2009
+ * 2009 Livshitz Rudy Model of a ventricular guinea pig myocte Biophysical
+ * Journal, 2009
  * 
  * LivR2009_Model.cpp, v1.1
  *
@@ -30,8 +30,8 @@
  * v1.0 - initial version
  * v1.1 - added ability to change model rate
  *
- * Model equations taken from Matlab model created by Dr. Eric Sobie.
- * Plugin constructed using only DefaultGUIModel.
+ * Model equations taken from Matlab model created by Dr. Eric Sobie. Plugin
+ * constructed using only DefaultGUIModel.
  *
  * math.h function exp(x) replaced with fastEXP(x) which uses PowFast.hpp due
  * to spikes in computation time of math.h function.
@@ -39,7 +39,7 @@
  ***/
 
 #include <default_gui_model.h>
-#include "include/PowFast.hpp"
+#include <powfast.hpp>
 
 // Physical constants 
 const static double F = 96485;          // Faraday's constant, C/mol
