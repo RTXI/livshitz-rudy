@@ -1,13 +1,10 @@
 PLUGIN_NAME = livshitz_rudy_2009
 
-RTXI_INCLUDES=/usr/local/lib/rtxi_includes
-
 HEADERS = LivR2009_Model.h
 
-SOURCES = LivR2009_Model.cpp \
-          ${RTXI_INCLUDES}/powfast.cpp
+SOURCES = LivR2009_Model.cpp
 
-LIBS = 
+LIBS = -lrtmath
 
 ### Do not edit below this line ###
 
